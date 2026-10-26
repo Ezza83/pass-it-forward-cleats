@@ -39,7 +39,7 @@
     const { error } = await client.from('cleat_donations').insert(record);
     button.disabled = false;
     if (error) { setMessage('donationMessage', 'We could not submit this donation. Please check the database policies and try again.', true); return; }
-    event.currentTarget.reset(); setMessage('donationMessage', 'Thank you! Your donation was submitted for review. It will not appear publicly until approved.');
+    form.reset(); setMessage('donationMessage', 'Thank you! Your donation was submitted for review. It will not appear publicly until approved.');
   });
   $('requestForm').addEventListener('submit', async (event) => {
     event.preventDefault();
