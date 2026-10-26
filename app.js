@@ -50,7 +50,7 @@
     const { error } = await client.from('cleat_requests').insert(record);
     button.disabled = false;
     if (error) { setMessage('requestMessage', 'We could not submit this request. Please check the database policies and try again.', true); return; }
-    event.currentTarget.reset(); setMessage('requestMessage', 'Thank you! Your request was submitted for review.');
+    event.target.reset(); setMessage('requestMessage', 'Thank you! Your request was submitted for review.');
   });
   loadInventory();
 })();
