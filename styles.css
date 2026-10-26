@@ -1,110 +1,201 @@
+
+/* Pass It Forward Cleats — Community Design */
+
+:root {
+  --forest: #24583d;
+  --green: #397653;
+  --sage: #e7efe5;
+  --cream: #fbf8f0;
+  --gold: #e6bd61;
+  --text: #29382e;
+  --muted: #647267;
+  --white: #ffffff;
+}
+
 * {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f4f7f4;
-  color: #243126;
-  line-height: 1.6;
+html {
+  scroll-behavior: smooth;
 }
 
-header, main, footer {
-  width: 90%;
-  max-width: 1100px;
-  margin: 0 auto;
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.7;
 }
 
 header {
-  padding: 32px 0 20px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 28px max(5%, calc((100% - 1120px) / 2));
+  background: var(--white);
+  border-bottom: 1px solid #e5eadd;
+}
+
+header h1 {
+  color: var(--forest);
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  line-height: 1.2;
+  margin: 0 0 8px;
 }
 
 header p {
-  color: #47734d;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-h1 {
-  color: #245c35;
-  font-size: 2.5rem;
-  margin: 0;
-}
-
-h2 {
-  color: #245c35;
-  margin-top: 28px;
-}
-
-a {
-  color: #24683a;
-  font-weight: bold;
+  color: var(--green);
+  font-weight: 600;
+  margin: 8px 0;
 }
 
 nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  margin: 18px 0;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+nav a {
+  display: inline-block;
+  color: var(--forest);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 9px 15px;
+  border-radius: 30px;
+  background: var(--sage);
+}
+
+nav a:hover {
+  background: var(--gold);
 }
 
 main {
-  padding-bottom: 40px;
+  width: 90%;
+  max-width: 1120px;
+  margin: 32px auto;
+  padding-bottom: 35px;
 }
 
 section {
-  background: white;
-  padding: 24px;
-  margin: 20px 0;
-  border-radius: 12px;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+  background: var(--white);
+  padding: clamp(20px, 4vw, 36px);
+  margin: 24px 0;
+  border: 1px solid #e7eadd;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(36, 88, 61, 0.07);
 }
 
-form {
-  display: grid;
-  gap: 12px;
-  max-width: 600px;
+section:first-child {
+  background: var(--sage);
+  border: none;
+  padding-top: 45px;
+  padding-bottom: 45px;
+}
+
+h2, h3 {
+  color: var(--forest);
+  line-height: 1.3;
+}
+
+h2 {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  margin-top: 0;
+}
+
+p {
+  margin-top: 8px;
+}
+
+a {
+  color: var(--green);
+}
+
+button {
+  background: var(--forest);
+  color: var(--white);
+  border: 0;
+  border-radius: 30px;
+  padding: 13px 22px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+button:hover {
+  background: var(--green);
+  transform: translateY(-1px);
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 13px 14px;
+  margin: 5px 0 12px;
+  font: inherit;
+  color: var(--text);
+  background: var(--white);
+  border: 1px solid #cbd7c8;
+  border-radius: 10px;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }
 
 label {
   display: block;
-  font-weight: bold;
-  margin-top: 6px;
+  color: var(--forest);
+  font-weight: 650;
+  margin-top: 8px;
 }
 
-input, select, textarea, button {
-  width: 100%;
-  padding: 12px;
-  font: inherit;
-  border: 1px solid #cbd5cc;
-  border-radius: 6px;
-}
-
-button {
-  background: #287541;
-  color: white;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #1e5d32;
+form {
+  display: grid;
+  gap: 8px;
+  max-width: 650px;
 }
 
 footer {
-  padding: 24px 0;
-  color: #5c6b5e;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 30px 5%;
+  text-align: center;
+  background: var(--forest);
+  color: var(--white);
+}
+
+footer p {
+  margin: 0;
 }
 
 @media (max-width: 600px) {
-  h1 {
-    font-size: 2rem;
+  header {
+    padding: 24px 5%;
+  }
+
+  nav {
+    gap: 8px;
+  }
+
+  nav a {
+    padding: 8px 12px;
+  }
+
+  main {
+    width: 92%;
+    margin-top: 20px;
   }
 
   section {
-    padding: 16px;
+    margin: 16px 0;
+    border-radius: 14px;
+  }
+
+  button {
+    width: 100%;
   }
 }
