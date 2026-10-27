@@ -49,8 +49,7 @@
     const button = event.currentTarget.querySelector('button[type="submit"]'); button.disabled = true;
     const { error } = await client.from('cleat_requests').insert(record);
     button.disabled = false;
-    if (error) {
-  console.error('Cleat request submission error:', error);
+    if (error) {console.error('Cleat request submission error:', error);
   setMessage('requestMessage', `Request failed: ${error.message}`, true);
   return;
 }
