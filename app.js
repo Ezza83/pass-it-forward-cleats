@@ -49,7 +49,11 @@
     const button = event.currentTarget.querySelector('button[type="submit"]'); button.disabled = true;
     const { error } = await client.from('cleat_requests').insert(record);
     button.disabled = false;
-    if (error) { setMessage('requestMessage', 'We could not submit this request. Please check the database policies and try again.', true); return; }
+    if (error) {
+  console.error('Cleat request submission error:', error);
+  setMessage('requestMessage', `Request failed: ${error.message}`, true);
+  return;
+}
     event.target.reset(); setMessage('requestMessage', 'Thank you! Your request was submitted for review.');
   });
   loadInventory();
