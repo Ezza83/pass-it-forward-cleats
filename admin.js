@@ -1,9 +1,7 @@
-
 const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_ANON_KEY
+  window.SUPABASE_URL,
+  window.SUPABASE_PUBLISHABLE_KEY
 );
-
 const loginForm = document.getElementById("adminLoginForm");
 const loginMessage = document.getElementById("loginMessage");
 
