@@ -7,6 +7,8 @@ const dashboardClient = window.supabase.createClient(
 const message = document.getElementById("dashboardMessage");
 const donationsSection = document.getElementById("donationsSection");
 const donationsList = document.getElementById("donationsList");
+const requestsSection = document.getElementById("requestsSection");
+const requestsList = document.getElementById("requestsList");
 const refreshButton = document.getElementById("refreshButton");
 const logoutButton = document.getElementById("logoutButton");
 
@@ -47,6 +49,7 @@ async function loadDashboard() {
   logoutButton.hidden = false;
 
   await loadPendingDonations();
+  await loadPendingRequests();
 }
 
 async function loadPendingDonations() {
@@ -119,8 +122,50 @@ async function loadPendingDonations() {
     donationsList.appendChild(card);
   }
 }
+async function loadPendingRequests() {
+  requestsList.replaceChildren();
+  requestsSection.hidden = false;
 
-refreshButton.addEventListener("click", loadPendingDonations);
+  const { data, error } = await dashboardClient
+    .from("cleat_requests")
+    .select("id, requester_name, cleat_size, sport, quantity, exchange_method, created_at")
+    .eq("status", "pending")
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    requestsList.textContent =
+      "Could not load requests. Please check administrator access policies.";
+    return;
+  }
+
+  if (!data.length) {
+    requestsList.textContent = "There are no pending cleat requests.";
+    return;
+  }
+
+  for (const request of data) {
+    const card = document.createElement("article");
+    card.className = "card";
+
+    const heading = document.createElement("h3");
+    heading.textContent =
+      `${request.sport} cleats — Size ${request.cleat_size}`;
+    card.appendChild(heading);
+
+    const details = document.createElement("p");
+    details.textContent =
+      `Requester: ${request.requester_name} | ` +
+      `Quantity: ${request.quantity} | ` +
+      `Exchange: ${request.exchange_method || "Not specified"}`;
+    card.appendChild(details);
+
+    requestsList.appendChild(card);
+  }
+}
+refreshButton.addEventListener("click", async () => {
+  await loadPendingDonations();
+  await loadPendingRequests();
+});
 
 logoutButton.addEventListener("click", async () => {
   await dashboardClient.auth.signOut();
