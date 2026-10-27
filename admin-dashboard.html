@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Pass It Forward Cleats</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Pass It Forward Cleats</h1>
+    <h2>Donation Approval Dashboard</h2>
+
+    <p id="dashboardMessage" role="status">
+      Checking administrator access...
+    </p>
+
+    <button id="refreshButton" type="button" hidden>
+      Refresh Donations
+    </button>
+
+    <section id="donationsSection" hidden>
+      <h2>Pending Donations</h2>
+      <div id="donationsList"></div>
+    </section>
+
+    <button id="logoutButton" type="button" hidden>
+      Sign Out
+    </button>
+
+    <p><a href="index.html">Return to Home</a></p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="admin-dashboard.js"></script>
+</body>
+</html>
