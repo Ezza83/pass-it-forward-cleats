@@ -100,6 +100,8 @@ async function loadPendingDonations() {
       approveButton.disabled = true;
       approveButton.textContent = "Approving...";
 
+
+
       const { error: approvalError } = await dashboardClient.rpc(
         "approve_cleat_donation",
         { p_donation_id: donation.id }
@@ -158,7 +160,66 @@ async function loadPendingRequests() {
       `Quantity: ${request.quantity} | ` +
       `Exchange: ${request.exchange_method || "Not specified"}`;
     card.appendChild(details);
+const approveRequestButton = document.createElement("button");
+approveRequestButton.type = "button";
+approveRequestButton.textContent = "Approve Request";
 
+approveRequestButton.addEventListener("click", async () => {
+  approveRequestButton.disabled = true;
+  approveRequestButton.textContent = "Approving...";
+
+  const { error } = await dashboardClient.rpc(
+    "review_cleat_request",
+    {
+      p_request_id: request.id,
+      p_new_status: "approved"
+    }
+  );
+
+  if (error) {
+    alert("Could not approve request: " + error.message);
+    approveRequestButton.disabled = false;
+    approveRequestButton.textContent = "Approve Request";
+    return;
+  }
+
+  alert("Request approved!");
+  await loadPendingRequests();
+});
+
+card.appendChild(approveRequestButton);
+    const rejectRequestButton = document.createElement("button");
+rejectRequestButton.type = "button";
+rejectRequestButton.textContent = "Reject Request";
+
+rejectRequestButton.addEventListener("click", async () => {
+  if (!confirm("Are you sure you want to reject this cleat request?")) {
+    return;
+  }
+
+  rejectRequestButton.disabled = true;
+  rejectRequestButton.textContent = "Rejecting...";
+
+  const { error } = await dashboardClient.rpc(
+    "review_cleat_request",
+    {
+      p_request_id: request.id,
+      p_new_status: "rejected"
+    }
+  );
+
+  if (error) {
+    alert("Could not reject request: " + error.message);
+    rejectRequestButton.disabled = false;
+    rejectRequestButton.textContent = "Reject Request";
+    return;
+  }
+
+  alert("Request rejected!");
+  await loadPendingRequests();
+});
+
+card.appendChild(rejectRequestButton);
     requestsList.appendChild(card);
   }
 }
